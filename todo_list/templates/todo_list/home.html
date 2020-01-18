@@ -4,6 +4,16 @@
 
 {% block content %}
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif%}
 <br/>
 <h1>Hello world</h1>
 
@@ -13,14 +23,16 @@
         {% if part.completed %}
             <tr class="table-secondary">
                 <td class="striker">{{part.item}}</td>
-                <td>{{part.completed}}</td>
-                <td>Deleted</td>
+                <td><a href="{% url 'update' part.id %}"> UnCross</a></td>
+                <td><a href="{% url 'delete' part.id %}">Deleted</a></td>
+                <td><a href="{% url 'edit' part.id %}">Edit</a></td>
             </tr>
         {% else %}
             <tr>
                 <td>{{part.item}}</td>
-                <td>{{part.completed}}</td>
-                <td>Deleted</td>
+                <td><a href="{% url 'update' part.id %}"> Cross off </a></td>
+                <td><a href="{% url 'delete' part.id %}">Deleted</a></td>
+                <td><a href="{% url 'edit' part.id %}">Edit</a></td>
             </tr>
         {% endif %}
 
