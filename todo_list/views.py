@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from .models import List
 
 
-# Create your views here.
 def home(request):
-    return render(request, 'todo_list/home.html', {})
+    lists = List.objects.all
+    return render(request, 'todo_list/home.html', {'lists':lists})
 
 
 def about(request):
